@@ -2,34 +2,31 @@ package com.leopicado.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ImageView
 
 import com.leopicado.diceroller.databinding.ActivityMainBinding
 
-private lateinit var binding: ActivityMainBinding
-
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var diceImage: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // findViewById
-//        setContentView(R.layout.activity_main)
-//        val buttonRoll = findViewById<Button>(R.id.button_roll)
-//        buttonRoll.text = "Let's Roll"
 
-        // viewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        diceImage = binding.imageviewDice
         binding.buttonRoll.text = "Let's Roll"
         binding.buttonRoll.setOnClickListener {
-            rollDice(binding)
+            rollDice()
         }
+
         setContentView(binding.root)
     }
 
-    private fun rollDice(binding: ActivityMainBinding) {
+    private fun rollDice() {
         val number = (1..6).random().toString()
-        binding.imageviewDice.setImageResource(
+        diceImage.setImageResource(
             when (number) {
                 "1" -> R.drawable.dice_1
                 "2" -> R.drawable.dice_2
